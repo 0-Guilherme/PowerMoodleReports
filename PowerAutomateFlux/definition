@@ -1,0 +1,113 @@
+{
+  "name": "6cd9157c-032f-40eb-9752-0591cbbae6ca",
+  "id": "/providers/Microsoft.Flow/flows/6cd9157c-032f-40eb-9752-0591cbbae6ca",
+  "type": "Microsoft.Flow/flows",
+  "properties": {
+    "apiId": "/providers/Microsoft.PowerApps/apis/shared_logicflows",
+    "displayName": "Relatorios__Teste",
+    "definition": {
+      "metadata": {
+        "workflowEntityId": null,
+        "processAdvisorMetadata": null,
+        "flowChargedByPaygo": null,
+        "flowclientsuspensionreason": "None",
+        "flowclientsuspensiontime": null,
+        "flowclientsuspensionreasondetails": null,
+        "creator": {
+          "id": "********-****-****-****-************",
+          "type": "User",
+          "tenantId": "********-****-****-****-************"
+        },
+        "provisioningMethod": "FromDefinition",
+        "failureAlertSubscription": true,
+        "clientLastModifiedTime": "2025-04-08T19:48:43.6455366Z",
+        "connectionKeySavedTimeKey": "2025-04-08T19:48:43.6455366Z",
+        "creationSource": "Portal",
+        "modifiedSources": "Portal"
+      },
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "Quando_um_novo_email_é_recebido_(V3)": {
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "type": "OpenApiConnectionNotification",
+          "inputs": {
+            "parameters": {
+              "from": "**********",
+              "includeAttachments": true,
+              "importance": "Any",
+              "fetchOnlyWithAttachment": true,
+              "folderPath": "Inbox"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "connectionName": "shared_office365",
+              "operationId": "OnNewEmailV3"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Enviar_um_email_-_Cursos": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "emailMessage/To": "****************",
+              "emailMessage/Subject": "Relatorio Semanal",
+              "emailMessage/Body": "Mensagem do relatório semanal.",
+              "emailMessage/Attachments": [
+                {
+                  "Name": "@outputs('Criar_arquivo')?['body/Name']",
+                  "ContentBytes": "@body('Obter_conteúdo_de_arquivo')"
+                }
+              ],
+              "emailMessage/Importance": "Normal"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365",
+              "connectionName": "shared_office365",
+              "operationId": "SendEmailV2"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    }
+  },
+  "connectionReferences": {
+    "shared_office365": {
+      "connectionName": "********",
+      "source": "Embedded",
+      "id": "/providers/Microsoft.PowerApps/apis/shared_office365",
+      "tier": "NotSpecified",
+      "apiName": "office365"
+    },
+    "shared_onedriveforbusiness": {
+      "connectionName": "********",
+      "source": "Embedded",
+      "id": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness",
+      "tier": "NotSpecified",
+      "apiName": "onedriveforbusiness"
+    },
+    "shared_excelonlinebusiness": {
+      "connectionName": "********",
+      "source": "Embedded",
+      "id": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness",
+      "tier": "NotSpecified",
+      "apiName": "excelonlinebusiness"
+    }
+  },
+  "flowFailureAlertSubscribed": false,
+  "isManaged": false
+}
