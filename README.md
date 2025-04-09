@@ -99,6 +99,8 @@ Administração do Site > Relatórios > Construtor de Relatórios > Relatórios 
 
 ## Scripts Utilizados
 
+Os scripts estão localizados dentro da pasta "Scripts". São eles:
+
 - **RemoverDuplicatas**: Remove linhas duplicadas no Excel.
 - **SubstituirVazio**: Substitui células vazias por valores padrão.
 - **CriarTabelasDinamicas**: Gera tabelas dinâmicas automaticamente.
