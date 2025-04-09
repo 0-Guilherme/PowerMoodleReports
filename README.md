@@ -55,6 +55,7 @@ Administração do Site > Relatórios > Construtor de Relatórios > Relatórios 
 ---
 
 ## Configuração do Power Automate
+O arquivo exportado com a ordem do fluxo está disponível na pasta PowerAutomateFlux
 
 ### Etapas:
 
